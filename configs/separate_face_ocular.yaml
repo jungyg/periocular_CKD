@@ -1,0 +1,34 @@
+
+# for better compatiable with philly and potential running enviroment
+# all path under path should be rel_path w.r.t the config.py
+# and the abspath will be compute when finalize
+
+# python -m torch.distributed.launch  --nproc_per_node=2 main.py  --setting naive_raw.yaml
+# --config trainer.default.log_step=1 trainer.default.sample_step=20
+
+device: 1
+
+batch_size: 16
+num_workers: 4
+epochs: 90
+
+lr: 0.1
+weight_decay: 0.0005
+momentum: 0.9
+decay_epochs: [30, 60, 80]
+
+model: resnet18
+
+network: separate_face_ocular_network
+dataset: both
+distill: both
+batchnorm: not_shared
+
+face_distill: True
+ocular_distill: True
+
+alpha: 0.9
+tau: 2.5
+
+result_path: ./results/
+
