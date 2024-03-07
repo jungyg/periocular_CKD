@@ -8,11 +8,11 @@ import math
 from .blocks import *
 
 
-class shared_face_ocular_net(nn.Module):
+class CKDNetwork(nn.Module):
     def __init__(self, block=shared_block, layers=[2, 2, 2, 2], num_classes=1054):
         self.num_classes = num_classes
         self.inplanes = 256
-        super(shared_face_ocular_net, self).__init__()
+        super(CKDNetwork, self).__init__()
         self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1,
                                bias=False)
         self.bn1 = nn.BatchNorm2d(64)

@@ -6,7 +6,7 @@
 # python -m torch.distributed.launch  --nproc_per_node=2 main.py  --setting naive_raw.yaml
 # --config trainer.default.log_step=1 trainer.default.sample_step=20
 
-device: 1
+device: 0
 
 batch_size: 16
 num_workers: 4
@@ -16,10 +16,12 @@ lr: 0.1
 weight_decay: 0.0005
 momentum: 0.9
 decay_epochs: [30, 60, 80]
+dataset_path: /home/yoon/data/face_ocular
 
 model: resnet18
 
-network: shared_face_ocular_net
+net_module: ckdnet
+network: CKDNetwork
 dataset: both
 distill: both
 batchnorm: shared

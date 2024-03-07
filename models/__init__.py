@@ -1,9 +1,9 @@
 from .face_network import face_network
 from .ocular_network import ocular_network
 from .separate_face_ocular_net import separate_face_ocular_net
-from .shared_face_ocular_net import shared_face_ocular_net
-from .shared_face_ocular_network_wo_shared_bn import shared_face_ocular_network_wo_shared_bn
-from .shared_ocular_network import shared_ocular_network
+from .ckdnet import CKDNetwork
+from .nosbn_ckdnet import NoSBN_CKDNet
+from .ocular_ckdnet import CKDNetwork_ocular
 
 
 # model_dict = {

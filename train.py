@@ -30,7 +30,7 @@ from config import config as cfg
 
 def train():
         
-    cfg.update_with_yaml("ckd.yaml")
+    cfg.update_with_yaml("without_shared_batchnorm.yaml")
     cfg.freeze()
 
     torch.backends.cudnn.enabled = True
@@ -54,12 +54,12 @@ def train():
 
 
     print('>>>> loading training dataset')
-    trainset = face_ocular.train_dataset(dset_type='train')
+    trainset = face_ocular.train_dataset(dset_type='train', cfg=cfg)
     train_loader = torch.utils.data.DataLoader(trainset, batch_size=cfg.batch_size, shuffle=True, num_workers=4)
     num_trainset = len(trainset)
     num_classes = trainset.num_classes
 
-    valset = face_ocular.train_dataset(dset_type='val')
+    valset = face_ocular.train_dataset(dset_type='val', cfg=cfg)
     val_loader = torch.utils.data.DataLoader(valset, batch_size=cfg.batch_size, num_workers=4)
     num_valset = len(valset)
 
@@ -70,7 +70,7 @@ def train():
     print('')
 
     print('>>>> loading module')
-    module = import_module('models.'+cfg.network)
+    module = import_module('models.'+cfg.net_module)
     model = getattr(module, cfg.network)().cuda()
 
 
@@ -152,24 +152,6 @@ def train():
             'log_dict':log_dict
         }        
         torch.save(state_dict, os.path.join(model_dir, 'last_checkpoint.pth'))
-
-
-    # for k,v in log_dict.items():
-    #     if 'train' in k:
-    #         x_range = range(len(log_dict[k]))
-    #         plt.plot(x_range, log_dict[k], label=k)
-    #         plt.legend(loc='upper right')
-    #         plt.savefig(os.path.join(figure_dir, k + '.jpg'))
-    #         plt.close()
-    #     elif 'val' in k:
-    #         plt.plot(val_list, log_dict[k], label=k)
-    #         plt.legend(loc='upper right')
-    #         plt.savefig(os.path.join(figure_dir, k + '.jpg'))
-    #         plt.close()
-
-
-    # with open(os.path.join(figure_dir, 'hyperparam_json.json'), 'w') as f:
-    #     json.dump(param_dict, f, indent=2)
 
 
 

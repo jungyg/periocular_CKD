@@ -16,10 +16,12 @@ lr: 0.1
 weight_decay: 0.0005
 momentum: 0.9
 decay_epochs: [30, 60, 80]
+dataset_path: /home/yoon/data/face_ocular
 
 model: resnet18
 
-network: separate_face_ocular_network
+net_module: separate_face_ocular_net
+network: separate_face_ocular_net
 dataset: both
 distill: both
 batchnorm: not_shared

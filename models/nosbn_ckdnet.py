@@ -9,11 +9,11 @@ from .blocks import *
 
 
 
-class shared_face_ocular_network_wo_shared_bn(nn.Module):
+class NoSBN_CKDNet(nn.Module):
     def __init__(self, block=IRBlock, layers=[2, 2, 2, 2], num_classes=1054):
         self.num_classes = num_classes
         self.inplanes = 64
-        super(shared_face_ocular_network_wo_shared_bn, self).__init__()
+        super(NoSBN_CKDNet, self).__init__()
         self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1,
                                bias=False)
         self.bn1 = nn.BatchNorm2d(64)

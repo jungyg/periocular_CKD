@@ -8,11 +8,11 @@ import matplotlib.pyplot as plt
 
 
 class train_dataset(data.Dataset):
-    def __init__(self, dset_type):
+    def __init__(self, dset_type, cfg):
         dset = 'trainingdb'
         assert dset_type in ['train', 'val', 'test']
         self.type = dset_type
-        self.root_dir = os.path.join('/home/yoon/data/face_ocular', dset, dset_type)
+        self.root_dir = os.path.join(cfg.dataset_path, dset, dset_type)
         self.num_classes = len(os.listdir(self.root_dir))
         self.face_img_dir_list = []
         self.ocular_img_dir_list = []
@@ -85,13 +85,13 @@ class train_dataset(data.Dataset):
 
 
 class benchmark_dataset(data.Dataset):
-    def __init__(self, dset_name, dset_type):
+    def __init__(self, dset_name, dset_type, cfg):
         dset = dset_name
         assert dset in ['ethnic', 'pubfig', 'facescrub', 'imdb_wiki', 'ar', 'ytf']
         if dset == 'ethnic':
-            self.root_dir = os.path.join('/home/yoon/data/face_ocular', dset, 'Recognition', dset_type)
+            self.root_dir = os.path.join(cfg.dataset_path, dset, 'Recognition', dset_type)
         else:
-            self.root_dir = os.path.join('/home/yoon/data/face_ocular', dset, dset_type)
+            self.root_dir = os.path.join(cfg.dataset_path, dset, dset_type)
         self.num_classes = len(os.listdir(self.root_dir))
         self.face_img_dir_list = []
         self.ocular_img_dir_list = []
@@ -136,11 +136,11 @@ class benchmark_dataset(data.Dataset):
 
 
 class verification_dataset(data.Dataset):
-    def __init__(self, dset, dset_type='gallery', ver_img_per_class=4):
+    def __init__(self, cfg, dset, dset_type='gallery', ver_img_per_class=4):
         if dset == 'ethnic':
-            self.root_dir = os.path.join('/home/yoon/data/face_ocular', dset, 'Recognition', dset_type)
+            self.root_dir = os.path.join(cfg.dataset_path, dset, 'Recognition', dset_type)
         else:
-            self.root_dir = os.path.join('/home/yoon/data/face_ocular', dset, dset_type)
+            self.root_dir = os.path.join(cfg.dataset_path, dset, dset_type)
         self.num_classes = len(os.listdir(self.root_dir))
         self.face_img_dir_list = []
         self.ocular_img_dir_list = []
